@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #efece6;
+  --color-canvas: #f7f5f1;
+  --color-card: #fffcf9;
+  --color-ink: #1c1d21;
+  --color-muted: #6e726c;
+  --color-line: #e6e1d8;
+  --color-sidebar: #1a1b1f;
+  --color-sidebar-soft: #2a2c31;
+  --color-foam: #f7f5f1;
+  --color-blush: #f3d4e4;
+  --color-blush-deep: #e4b4cd;
+  --color-sage: #d3ebc0;
+  --color-sage-deep: #b4d696;
+  --color-butter: #f6e7ae;
+  --color-butter-deep: #e4cd78;
+  --color-periw: #d5e2f8;
+  --color-periw-deep: #b5c8ee;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --shadow-lift: 0 1px 2px rgba(28, 29, 33, 0.05), 0 16px 40px rgba(28, 29, 33, 0.06);
+  --radius-card: 1.5rem;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+[data-theme="night"] {
+  --color-paper: #141311;
+  --color-canvas: #1e1c19;
+  --color-card: #2a2723;
+  --color-ink: #f6f3ec;
+  --color-muted: #b7b1a6;
+  --color-line: #3c3832;
+  --color-sidebar: #0e0d0c;
+  --color-sidebar-soft: #2c2926;
+  --color-blush: #5a3d4b;
+  --color-blush-deep: #7d5568;
+  --color-sage: #3e5340;
+  --color-sage-deep: #65805f;
+  --color-butter: #5c5132;
+  --color-butter-deep: #8d7844;
+  --color-periw: #3a4662;
+  --color-periw-deep: #61739a;
+  --shadow-lift: 0 1px 2px rgba(0, 0, 0, 0.35), 0 16px 40px rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+.backdrop-scrim {
+  background: rgba(16, 14, 12, 0.16);
+}
+
+[data-glass="on"] main,
+[data-glass="on"] aside {
+  backdrop-filter: blur(18px);
+}
+
+[data-glass="on"] main {
+  background-color: color-mix(in srgb, var(--color-canvas) 28%, transparent);
+}
+
+[data-glass="on"] aside {
+  background-color: color-mix(in srgb, var(--color-sidebar) 70%, transparent);
+}
+
+[data-glass="on"] main .bg-card,
+[data-glass="on"] header .bg-card {
+  background-color: color-mix(in srgb, var(--color-card) 34%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+[data-glass="on"] main .bg-paper,
+[data-glass="on"] header .bg-canvas\/90 {
+  background-color: color-mix(in srgb, var(--color-paper) 36%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+[data-glass="on"] main .bg-blush {
+  background-color: color-mix(in srgb, var(--color-blush) 55%, transparent);
+}
+
+[data-glass="on"] main .bg-sage {
+  background-color: color-mix(in srgb, var(--color-sage) 55%, transparent);
+}
+
+[data-glass="on"] main .bg-butter {
+  background-color: color-mix(in srgb, var(--color-butter) 55%, transparent);
+}
+
+[data-glass="on"] main .bg-periw {
+  background-color: color-mix(in srgb, var(--color-periw) 55%, transparent);
+}
+
+.header-shadow {
+  text-shadow: 0 1px 2px rgba(16, 14, 12, 0.55);
+}
+
+.veil {
+  background: rgba(16, 14, 12, 0.45);
+}
+
+.veil-strong {
+  background: rgba(16, 14, 12, 0.78);
+}
+
+@layer components {
+  .press {
+    transition: scale 150ms ease-out;
+  }
+  .press:active:not(:disabled) {
+    scale: 0.96;
+  }
+  .field {
+    width: 100%;
+    border-radius: 0.9rem;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    padding: 0.8rem 0.9rem;
+    font-size: 1rem;
+    box-shadow: inset 0 0 0 1px rgba(28, 29, 33, 0.08);
+  }
+  .field:focus {
+    box-shadow: inset 0 0 0 1.5px var(--color-ink);
+    outline: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press,
+  .press:active {
+    transition: none;
+    scale: 1;
+  }
+}
