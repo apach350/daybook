@@ -641,7 +641,7 @@ export function LedgerProvider({ children }: { children: ReactNode }) {
       setShowHeader,
       setHideMoney,
       logBill,
-      cash: (cents: number) => (snap?.meta.hideMoney ? "••••" : formatMoney(cents)),
+      cash: (cents: number) => (snap?.meta.hideMoney ? "\u2022\u2022\u2022\u2022" : formatMoney(cents)),
       markQuietToday,
       clearSample,
       removeEntryPhoto,
