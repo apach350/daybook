@@ -82,7 +82,7 @@ test("injects x:creator tags when both creator values are set", () => {
 });
 
 test("escapes x:creator values", () => {
-  const tags = grokXCreatorHeadTags('"> <script>', '1" onclick="alert(1)');
+  const tags = grokXCreatorHeadTags('"><script>', '1" onclick="alert(1)');
   assert.equal(
     tags[0],
     '<meta property="x:creator" content="&quot;&gt;&lt;script&gt;">',
@@ -147,6 +147,8 @@ test("baked identity does not need a workspace filesystem", () => {
 });
 
 test("a public card file wins over a baked site without card=custom", () => {
+  // Deploy middleware always passes a baked `site`. If that snapshot missed
+  // the file, public/og.jpg must still beat the og.grok.me placeholder.
   const root = mkdtempSync(join(tmpdir(), "grok-og-card-"));
   mkdirSync(join(root, "public"));
   writeFileSync(join(root, "public/og.jpg"), "x");
@@ -489,7 +491,7 @@ test("names the install page from host slug", () => {
 
 test("rejects hosts that are not plain slugs", () => {
   assert.equal(appNameFromHost("<script>alert(1)</script>"), "Grok App");
-  assert.equal(appNameFromHost('"><img src=x onerror=1>.grok.me'), "Grok App");
+  assert.equal(appNameFromHost('"> <img src=x onerror=1>.grok.me'), "Grok App");
 });
 
 test("renders install page markup", () => {
